@@ -119,10 +119,10 @@ resource "aws_acm_certificate" "elb_cert" {
 
 resource "aws_route53_record" "cer_verify" {
   zone_id = "${data.aws_route53_zone.selected.zone_id}"
-  name    = "${aws_acm_certificate.elb_cert.resource_record_name}"
-  type    = "${aws_acm_certificate.elb_cert.resource_record_type}"
+  name    = "${aws_acm_certificate.elb_cert.domain_validation_options.0.resource_record_name}"
+  type    = "${aws_acm_certificate.elb_cert.domain_validation_options.0.resource_record_type}"
   ttl     = "300"
-  records = ["${aws_acm_certificate.elb_cert.resource_record_value}"]
+  records = ["${aws_acm_certificate.elb_cert.domain_validation_options.0.resource_record_value}"]
 }
 
 resource "aws_acm_certificate_validation" "cert" {
