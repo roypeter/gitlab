@@ -37,8 +37,8 @@ data "aws_route53_zone" "selected" {
 }
 
 resource "aws_security_group" "gitlab_ec2" {
-  name        = "gitlab-instance"
-  description = "gitlab instance"
+  name        = "${var.project_name}-ec2"
+  description = "${var.project_name}-ec2"
   vpc_id      = "${data.aws_subnet.ec2.vpc_id}"
 
   ingress {
@@ -64,8 +64,8 @@ resource "aws_security_group" "gitlab_ec2" {
 }
 
 resource "aws_security_group" "gitlab_elb" {
-  name        = "gitlab-elb"
-  description = "gitlab elb"
+  name        = "${var.project_name}-elb"
+  description = "${var.project_name}-elb"
   vpc_id      = "${data.aws_subnet.elb.vpc_id}"
 
   ingress {
